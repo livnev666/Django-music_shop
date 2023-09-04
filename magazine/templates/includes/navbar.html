@@ -1,0 +1,17 @@
+{% load static %}
+
+<nav>
+  {% for i in dc_bar %}
+    <a href="{% url i.url_name %}">{{i.title}}//\\</a>
+  {% endfor %}
+
+  {% if request.user.is_authenticated %}
+    <li>Привет {{user.username}}!</li> || <a href="{% url 'log_out' %}">Выход</a>
+  {% else %}
+    <a href="{% url 'log_in' %}">Авторизация</a> || <a href="{% url 'register' %}">Регистрация</a>
+  {% endif %}
+
+
+
+
+</nav>

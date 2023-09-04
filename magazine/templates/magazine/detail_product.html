@@ -1,0 +1,67 @@
+{% extends 'magazine/base.html' %}
+
+{% load static %}
+
+{% block additional %}
+     <link rel="stylesheet" href="{% static 'magazine/css/detail_product.css' %}">
+{% endblock %}
+
+
+
+{% block title %} Все о {{one_prod.name}} {% endblock %}
+
+{% block content %}
+
+    <hr>
+    {% include 'includes/navbar.html' %}
+    <div class="container">
+    <h3>Наименование: {{one_prod.name}}</h3>
+    <h4>Описание: {{one_prod.content}}</h4>
+    {% if one_prod.photo %}
+        <img src="{{one_prod.photo.url}}" alt="" height="400" width="500">
+    {% endif %}
+    </div>
+    <h4>Цена: {{one_prod.price}} руб</h4>
+
+
+
+    <hr>
+
+    <h2><a href="{{ one_prod.category.get_product_url }}">Категория: {{one_prod.category.name}}</a></h2>
+    <br>
+    {% if request.user.is_authenticated %}
+        <form action="{% url 'cart_add' one_prod.id %}" method="post">
+            {% csrf_token %}
+            {{cart_product_form}}
+        <input type="submit" value="В корзину">
+        </form>
+    {% else %}
+    <h4>Для покупки авторизируйтесь</h4>
+    {% endif %}
+    <br>
+    {% if request.user.is_authenticated %}
+      <form action="" method="post">
+            {% csrf_token %}
+            {% for i in form %}
+              <div class="form-style">
+                {{i.label_tag}}
+                {{i.errors}}
+                {{i}}
+              </div>
+            {% endfor %}
+            <input type="submit" value="Добавить комментарий">
+        </form>
+    {% else %}
+        <h4>Комментарии могут добавлять только авторизованные пользователи</h4>
+    {% endif %}
+
+    <h5>Количество комментариев: {{one_prod.commentuser_product.all.count}}</h5>
+    {% for i in one_prod.commentuser_product.all %}
+        <br>
+        <br>
+        <p>Имя пользователя: {{i.name}}</p>
+        <p>Комментарий: {{i.comment}}</p>
+        <p>Комментарий опубликован: << {{i.create_date}} >></p>
+    {% endfor %}
+
+{% endblock %}

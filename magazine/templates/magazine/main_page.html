@@ -1,0 +1,19 @@
+{% extends 'magazine/base.html' %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% load static %}
+
+{% block additional %}
+     <link rel="stylesheet" href="{% static 'magazine/css/title_showcase.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+{% include 'includes/navbar.html' %}
+
+  <h1>Musical Instrument Store "Puking Synthesizer"</h1>
+
+
+{% endblock %}

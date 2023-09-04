@@ -1,0 +1,24 @@
+a {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    list-style-type: none;
+    width: 90%;
+    max-width: 35rem;
+    border-radius: 20px;
+    margin: 2rem auto;
+    padding: 1px;
+}
+nav {
+    text-align: center;
+    color: DimGrey;
+    font-size: 1.5rem;
+    height: 10%;
+    padding-top: 20px;
+}
+
+nav a {
+    color: grey;
+    font-size: 1.5rem;
+    margin: 2px;
+}

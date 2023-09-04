@@ -1,0 +1,30 @@
+{% extends 'magazine/base.html' %}
+
+{% load static %}
+
+{% block additional %}
+     <link rel="stylesheet" href="{% static 'magazine/css/guitar.css' %}">
+{% endblock %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+{% include 'includes/navbar.html' %}
+
+<h2>{{title}}:</h2>
+
+    <ul>
+        <li>
+            {% for i in prod %}
+                <h4><a href="{{ i.get_product_url }}">{{i.name}}</a></h4>
+                {% if i.photo %}
+                    <p><img src="{{i.photo.url}}" alt="" height="300" width="450"></p>
+                {% endif %}
+            <hr>
+            {% endfor %}
+
+        </li>
+    </ul>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'magazine/base.html' %}
+
+{% load static %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+{% include 'includes/navbar.html' %}
+  <h3>{{title}}</h3>
+  <form method="post">
+        {% csrf_token %}
+        {% for i in form %}
+          <div class="form-style {% if i.errors %} errors {% endif %}">
+            {{i.label_tag}}
+            {{i.errors}}
+            {{i}}
+          </div>
+        {% endfor %}
+
+        <button type="submit">Регистрация</button>
+    </form>
+
+{% endblock %}
